@@ -6,8 +6,10 @@ from typing import List
 import re
 
 
-def filter_datum(fld: List[str], rdc: str, msg: str, sep: str) -> str:
-    """0. Regex-ing:"""
-    for fl in fld:
-        msg: str = re.sub(f'{fl}=.*?{sep}', f'{fl}={rdc}{sep}', msg)
-    return msg
+def filter_datum(fields: List[str], redaction: str,
+                 message: str, separator: str) -> str:
+    """ Returns a log message obfuscated """
+    for f in fields:
+        message = re.sub(f'{f}=.*?{separator}',
+                         f'{f}={redaction}{separator}', message)
+    return message
