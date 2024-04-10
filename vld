@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+pycodestyle "$1"
+mypy "$1"
