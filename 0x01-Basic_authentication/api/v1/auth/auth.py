@@ -23,7 +23,8 @@ class Auth:
 
                 for end_fil in exluded_path:
                     cprs = end_fil[:-1]
-                    if path == cprs:
+                    cpath = path[:len(cprs)]
+                    if cpath == cprs:
                         return False
 
         return True
