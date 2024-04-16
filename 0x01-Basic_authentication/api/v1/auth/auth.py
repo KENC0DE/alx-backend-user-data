@@ -13,11 +13,9 @@ class Auth:
         """ Return False for now"""
         return False
 
-
     def authorization_header(self, request=None) -> str:
         """Returns flask request"""
         return request
-
 
     def current_user(self, request=None) -> TypeVar('User'):
         """Returns flask request"""
