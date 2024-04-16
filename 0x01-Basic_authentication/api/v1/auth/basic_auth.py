@@ -41,7 +41,7 @@ class BasicAuth(Auth):
         """ extract user credtials"""
         d64 = decoded_base64_authorization_header
         if d64 and type(d64) is str and ':' in d64:
-            return tuple(d64.split(':'))
+            return tuple(d64.split(':', 1))
 
         return (None, None)
 
