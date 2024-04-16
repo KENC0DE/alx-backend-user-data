@@ -30,3 +30,9 @@ def stats() -> str:
 def try_unauthorized() -> None:
     """Rise abort error for testing"""
     abort(401)
+
+
+@app_views.route('/forbidden', strict_slashes=False)
+def try_forbidden() -> None:
+    """Rise abort error for testing"""
+    abort(403)
