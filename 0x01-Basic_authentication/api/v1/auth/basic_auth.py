@@ -50,10 +50,13 @@ class BasicAuth(Auth):
         ue = user_email
         up = user_pwd
         if ue and up and type(ue) is str and type(up) is str:
-            userl = User.search({'email': user_email})
-            if userl and userl != []:
-                for user in userl:
-                    if user.is_valid_password(user_pwd):
-                        return user
+            try:
+                userl = User.search({'email': user_email})
+                if userl and userl != []:
+                    for user in userl:
+                        if user.is_valid_password(user_pwd):
+                            return user
+            except Exception:
+                return None
 
         return None
