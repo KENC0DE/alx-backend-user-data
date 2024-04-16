@@ -20,8 +20,11 @@ class Auth:
             if exluded_path and exluded_path != []:
                 if path in exluded_path or altr in exluded_path:
                     return False
-                else:
-                    return True
+
+                for end_fil in exluded_path:
+                    cprs = end_fil[:-1]
+                    if path == cprs:
+                        return False
 
         return True
 
