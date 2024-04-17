@@ -15,6 +15,6 @@ class SessionAuth(Auth):
         if not user_id or type(user_id) is not str:
             return None
 
-        session_id = uuid4()
+        session_id = str(uuid4())
         self.user_id_by_session_id.update({session_id: user_id})
-        return str(session_id)
+        return session_id
