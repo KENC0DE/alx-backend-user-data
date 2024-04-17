@@ -38,6 +38,10 @@ def do_before() -> None:
     if not auth.require_auth(request.path, no_auth):
         return
 
+    if auth.authorization_header(request) is None \
+            and auth.session_cookie(request) is None:
+        abort(401)
+
     if not auth.authorization_header(request):
         abort(401)
 
@@ -46,11 +50,6 @@ def do_before() -> None:
         abort(403)
 
     request.current_user = current_user
-
-    authorize = auth.authorization_header(request)
-    s_cookie = auth.session_cookie(request)
-    if not authorize and not s_cookie:
-        abort(401)
 
 
 @app.errorhandler(404)
