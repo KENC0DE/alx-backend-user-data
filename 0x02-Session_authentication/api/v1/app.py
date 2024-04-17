@@ -33,7 +33,8 @@ def do_before() -> None:
 
     no_auth = ['/api/v1/status/',
                '/api/v1/unauthorized/',
-               '/api/v1/forbidden/']
+               '/api/v1/forbidden/',
+               '/api/v1/auth_session/login/']
     if not auth.require_auth(request.path, no_auth):
         return
 
@@ -45,6 +46,11 @@ def do_before() -> None:
         abort(403)
 
     request.current_user = current_user
+
+    authorize = auth.authorization_header(request)
+    s_cookie = auth.session_cookie(request)
+    if not authorize and not s_cookie:
+        abort(401)
 
 
 @app.errorhandler(404)
