@@ -3,8 +3,18 @@
 Session Authentication
 """
 from api.v1.auth.auth import Auth
+from uuid import uuid4
 
 
 class SessionAuth(Auth):
     """Session class inherits from Auth"""
-    pass
+    user_id_by_session_id = {}
+
+    def create_session(self, user_id: str = None) -> str:
+        """Create session"""
+        if not user_id or type(user_id) is not str:
+            return None
+
+        session_id = uuid4()
+        self.user_id_by_session_id.update({session_id: user_id})
+        return str(session_id)
