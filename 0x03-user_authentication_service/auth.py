@@ -4,7 +4,7 @@
 import bcrypt
 
 
-def _hash_password(pwd: str) -> str:
-    """Returns hashed bytes of a given password"""
-    hashed_pwd = bcrypt.hashpw(pwd.encode(), bcrypt.gensalt())
-    return hashed_pwd
+def _hash_password(password: str) -> str:
+    """ Returns a salted hash of the input password """
+    hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+    return hashed
