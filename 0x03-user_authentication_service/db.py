@@ -44,21 +44,16 @@ class DB:
 
         return user
 
-    def find_user_by(self, **kwargs: Dict) -> User:
-        """ Finds user by key word args
-        Return: First row found in the users table as filtered by kwargs
+    def find_user_by(self, **kwargs) -> User:
+        """Returns first rrow found in users table
+        as filtered by methods input arguments
         """
-        if not kwargs:
-            raise InvalidRequestError
-
-        column_names = User.__table__.columns.keys()
+        user_keys = ['id', 'email', 'hashed_password', 'session_id',
+                     'reset_token']
         for key in kwargs.keys():
-            if key not in column_names:
+            if key not in user_keys:
                 raise InvalidRequestError
-
-        user = self._session.query(User).filter_by(**kwargs).first()
-
-        if not User:
+        result = self._session.query(User).filter_by(**kwargs).first()
+        if result is None:
             raise NoResultFound
-
-        return user
+        return result
