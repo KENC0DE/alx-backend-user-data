@@ -8,6 +8,7 @@ from sqlalchemy.orm.session import Session
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from typing import TypeVar
+from typing import Dict
 from user import User
 from user import Base
 
@@ -43,7 +44,7 @@ class DB:
 
         return user
 
-    def find_user_by(self, **kwargs) -> User:
+    def find_user_by(self, **kwargs: Dict) -> User:
         """ Finds user by key word args
         Return: First row found in the users table as filtered by kwargs
         """
