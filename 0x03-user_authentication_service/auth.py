@@ -101,5 +101,5 @@ class Auth:
             hashed_pwd = _hash_password(password)
             user.hashed_password = hashed_pwd
             user.reset_token = None
-        except Exception:
-            return None
+        except NoResultFound:
+            raise ValueError
