@@ -80,7 +80,6 @@ class Auth:
         """ Destory user's session ID"""
         try:
             user = self._db.find_user_by(id=user_id)
-            user.id = None
-            self._db._session.commit()
+            self._db.update_user(user.id, session_id=None)
         except Exception:
-            pass
+            return None
