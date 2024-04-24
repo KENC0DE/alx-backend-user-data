@@ -81,11 +81,10 @@ def reset_password() -> str:
 @app.route('/reset_password', methods=['PUT'], strict_slashes=False)
 def reset_password() -> str:
     """Reset User password"""
-    form = request.form
     try:
-        email = form['email']
-        r_token = form['reset_tokn']
-        n_password = form['new_password']
+        email = request.form['email']
+        r_token = request.form['reset_tokn']
+        n_password = request.form['new_password']
     except KeyError:
         abort(400)
 
@@ -95,7 +94,8 @@ def reset_password() -> str:
         abort(403)
 
     return jsonify({'email': email,
-                'message': 'password updated'})
+                    'message': 'password updated'})
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
