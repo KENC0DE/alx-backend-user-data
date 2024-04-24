@@ -81,11 +81,11 @@ def reset_password() -> str:
 @app.route('/reset_password', methods=['PUT'], strict_slashes=False)
 def reset_password() -> str:
     """Reset User password"""
-    form = request.form()
+    form = request.form
     try:
-        email = form.get('email')
-        r_token = form.get('reset_tokn')
-        n_password = form.get('new_password')
+        email = form['email']
+        r_token = form['reset_tokn']
+        n_password = form['new_password']
     except KeyError:
         abort(400)
 
