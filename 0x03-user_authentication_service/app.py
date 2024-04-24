@@ -91,11 +91,11 @@ def reset_password() -> str:
 
     try:
         AUTH.update_password(r_token, n_password)
-        return jsonify({'email': email,
-                        'message': 'password updated'})
     except ValueError:
         abort(403)
 
+    return jsonify({'email': email,
+                'message': 'password updated'})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
