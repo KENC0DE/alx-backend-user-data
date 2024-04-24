@@ -94,7 +94,7 @@ def reset_password() -> str:
         abort(403)
 
     return jsonify({'email': email,
-                    'message': 'password updated'})
+                    'message': 'Password updated'})
 
 
 if __name__ == "__main__":
