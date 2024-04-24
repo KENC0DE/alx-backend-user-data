@@ -53,3 +53,14 @@ class Auth:
         p2 = user.hashed_password
 
         return bcrypt.checkpw(p1, p2)
+
+    def create_session(self, email: str) -> str:
+        """Retuns sessoin ID"""
+        try:
+            user = self._db.find_user_by(email=email)
+            s_id = _generate_uuid()
+            user.session_id = s_id
+            self._db._session.commit()
+            return s_id
+        except Exception:
+            return None
