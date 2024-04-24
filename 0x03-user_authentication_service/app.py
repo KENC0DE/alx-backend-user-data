@@ -81,20 +81,13 @@ def reset_password() -> str:
 @app.route('/reset_password', methods=['PUT'], strict_slashes=False)
 def update_password() -> str:
     """Reset User password"""
+    form = request.form
     try:
-        email = request.form['email']
-        r_token = request.form['reset_tokn']
-        n_password = request.form['new_password']
-    except KeyError:
-        abort(400)
-
-    try:
-        AUTH.update_password(r_token, n_password)
-    except ValueError:
+        AUTH.update_password(form['reset_token'], form['new_password'])
+        return jsonify({'email': form['email'],
+                        'message': 'password updated'}), 200
+    except (ValueError, KeyError):
         abort(403)
-
-    return jsonify({'email': email,
-                    'message': 'Password updated'}), 200
 
 
 if __name__ == "__main__":
