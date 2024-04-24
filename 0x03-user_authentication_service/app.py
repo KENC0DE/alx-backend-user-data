@@ -39,8 +39,8 @@ def login() -> str:
         resp = jsonify(msg)
         resp.set_cookie('session_id', s_id)
         return resp
-    else:
-        abort(401)
+
+    abort(401)
 
 
 if __name__ == "__main__":
