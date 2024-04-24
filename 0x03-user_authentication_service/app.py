@@ -85,11 +85,9 @@ def update_password() -> str:
     try:
         AUTH.update_password(form['reset_token'], form['new_password'])
         return jsonify({'email': form['email'],
-                        'message': 'password updated'}), 200
-    except ValueError:
+                        'message': 'Password updated'}), 200
+    except (ValueError, KeyError):
         abort(403)
-    except KeyError:
-        abort(400)
 
 
 if __name__ == "__main__":
